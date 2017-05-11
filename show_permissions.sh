@@ -8,15 +8,19 @@ adb shell 'cat /system/build.prop | grep arm'            #| gsed "s/\r$//"
 
 adb shell 'ls -al /system/etc/permissions/'
 
-adb shell 'find /system/etc/permissions/ | xargs grep gid=\"root\"'
-adb shell 'find /system/etc/permissions/ | xargs grep gid=\"system\"'
-adb shell 'find /system/etc/permissions/ | xargs grep gid=\"shell\"'
+adb shell 'find /system/etc/permissions/ -type f | xargs grep gid=\"root\"'
+adb shell 'find /system/etc/permissions/ -type f | xargs grep gid=\"system\"'
+adb shell 'find /system/etc/permissions/ -type f | xargs grep gid=\"shell\"'
 
-#adb shell 'find /system/etc/permissions/ | xargs grep -C 5 gid=\"system\"'  # error, not work
+#adb shell 'find /system/etc/permissions/ | xargs grep -B 4 gid=\"system\"'  # error, not work
 
-adb shell 'grep -C 5 gid=\"root\" /system/etc/permissions/*'
-adb shell 'grep -C 5 gid=\"system\" /system/etc/permissions/*'
-adb shell 'grep -C 5 gid=\"shell\" /system/etc/permissions/*'
+adb shell 'find /system/etc/permissions/ -type f | xargs /system/bin/grep -B 4 gid=\"root\"'
+adb shell 'find /system/etc/permissions/ -type f | xargs /system/bin/grep -B 4 gid=\"system\"'
+adb shell 'find /system/etc/permissions/ -type f | xargs /system/bin/grep -B 4 gid=\"shell\"'
+
+#adb shell 'grep -B 4 gid=\"root\" /system/etc/permissions/*'
+#adb shell 'grep -B 4 gid=\"system\" /system/etc/permissions/*'
+#adb shell 'grep -B 4 gid=\"shell\" /system/etc/permissions/*'
 
 
 adb shell 'dumpsys package'
