@@ -5,6 +5,12 @@ MODEL=${MODEL##*=}
 
 echo $MODEL
 
+OUTPUT_FILE="console_show_info_${MODEL}.log"
+./show_info.sh        > "$OUTPUT_FILE" 2>&1
+gsed -i 's/\r$//g'             "$OUTPUT_FILE"
+gsed -i 's/^+ adb/\n+ adb/g'   "$OUTPUT_FILE"
+
+
 OUTPUT_FILE="console_find_syscall_${MODEL}.log"
 ./find_syscall.sh        > "$OUTPUT_FILE" 2>&1
 gsed -i 's/\r$//g'             "$OUTPUT_FILE"

@@ -1,6 +1,9 @@
 #!/bin/bash -x
 
 adb shell 'uname -a'                                     #| gsed "s/\r$//"
+adb shell "cat /proc/sys/kernel/ostype"
+adb shell "cat /proc/sys/kernel/osrelease"
+adb shell "cat /proc/sys/kernel/version"
 adb shell 'id'                                           #| gsed "s/\r$//"
 adb shell 'cat /system/build.prop | grep model'          #| gsed "s/\r$//"
 adb shell 'cat /system/build.prop | grep version'        #| gsed "s/\r$//"
