@@ -1,13 +1,17 @@
 #!/bin/bash -x
 
 adb shell 'uname -a'                                     #| gsed "s/\r$//"
+adb shell 'cat /proc/version'
 adb shell "cat /proc/sys/kernel/ostype"
 adb shell "cat /proc/sys/kernel/osrelease"
 adb shell "cat /proc/sys/kernel/version"
 adb shell 'id'                                           #| gsed "s/\r$//"
 adb shell 'cat /system/build.prop | grep model'          #| gsed "s/\r$//"
-adb shell 'cat /system/build.prop | grep version'        #| gsed "s/\r$//"
 adb shell 'cat /system/build.prop | grep arm'            #| gsed "s/\r$//"
+adb shell 'cat /system/build.prop | grep version'        #| gsed "s/\r$//"
+adb shell 'getprop ro.product.model'
+adb shell 'getprop ro.product.cpu.abi'
+adb shell 'getprop ro.build.version.release'
 
 #
 # show general info
